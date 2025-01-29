@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fdf9f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #f7f2f2;
+            padding: 20px;
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            /* width: 100%; */
+            margin: 20px;
+
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-left h2,
+        .header-left p {
+            margin: 0;
+            margin-right: 20px;
+        }
+
+        .header-left p {
+            color: #45a049;
+        }
+
+        .header-right .order-button {
+            background-color: #f39c12;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        a {
+            padding: 10px 20px;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .back-button {
+            background-color: #4fabf7;
+            padding: 4px;
+            border: 2px;
+        }
+
+        .back-button:hover {
+            background-color: #1976D2;
+        }
+
+        .logout-button {
+            background-color: #76f57a;
+            padding: 4px;
+        }
+
+        .logout-button:hover {
+            background-color: #45a049;
+        }
+
+        .create-button {
+            background-color: #f39c12;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        .create-button:hover {
+            background-color: #e67e22;
+        }
+
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            gap: 36px;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            background-color: #f8f2f2;
+            text-align: center;
+            padding: 5px;
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            height: 90px;
+            text-align: left;
+            transition: box-shadow 0.3s;
+            margin: 0px;
+            border-style: groove;
+        }
+
+        .card:hover {
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .card img {
+            width: 12%;
+            height: 85px;
+            border-radius: 2px;
+            object-fit: cover;
+            align-self: center;
+            margin-bottom: 10px;
+        }
+
+        .card-content {
+            width: 85%;
+            display: flex;
+            flex-direction: row;
+            gap: 120px;
+            align-items: normal;
+            padding: 10px;
+            padding-left: 10px;
+            margin: 10px;
+            font-size: 15px;
+            background-color: rgb(250, 252, 250);
+
+        }
+
+        .card h4 {
+            margin: 10px 0 5px;
+        }
+
+        .card p {
+            margin: 5px 0;
+        }
+
+        .card .price {
+            margin-bottom: 5px;
+        }
+
+        .card .quantity {
+            margin-bottom: 15px;
+        }
+
+        .card .remove-from-cart-button {
+            background-color: #f19685;
+            padding: 8px 15px;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 3px;
+            transition: background-color 0.3s;
+            align-self: flex-start;
+            border: none;
+            cursor: pointer;
+            height: 25px;
+            text-align: center;
+        }
+
+        .card .remove-from-cart-button:hover {
+            background-color: #f80e0e;
+        }
+
+        .payment-order {
+            text-align: center;
+        }
+
+        .payment-order .add-to-cart-payment {
+            background-color: #f37272;
+            border-radius: 2px;
+            padding: 2px;
+        }
+
+        .fab {
+            background-color: #f80e0e;
+        }
+
+        .quantity {
+            font-size: 12px;
+            display: flex;
+        }
+
+        .quantity-input {
+            width: 40px;
+            height: 12px;
+            font-size: 8px;
+            margin-right: 5px;
+            padding: 5px;
+        }
+
+        .cart-total {
+            text-align: center;
+            width: 100%;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .cart-total p {
+            background-color: #7190f5;
+            align-items: center;
+            width: 20%;
+            height: 20px;
+        }
+
+        .order-button {
+            background-color: #45a049;
+            padding: 8px;
+            color: #fff;
+            border-radius: 3px;
+            align-self: flex-start;
+            height: 11px;
+            text-align: center;
+
+        }
+
+        .footer {
+            background-color: black;
+            text-align: center;
+
+
+        }
+
+        .footer p {
+            color: whitesmoke;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        $(document).ready(function () {
+            // Function to update the  total sum of product
+            function updateTotalSum() {
+                let totalSum = 0;
+                $('.product-list .card').each(function () {
+                    const price = parseFloat($(this).find('.price').data('price'));
+                    const quantity = parseInt($(this).find('.quantity-input').val());
+                    totalSum += price * quantity;
+                });
+                $('#total-sum').text(totalSum.toFixed(2));
+            }
+
+            //  function Remove item from cart functionality
+            $('.remove-from-cart-button').click(function (event) {
+                event.preventDefault();
+                const item_id = $(this).data('id');
+                const quantity = $(this).closest('.card-content').find('.quantity-input').val(); // Get updated quantity
+
+
+                const csrf_token = getCookie('csrftoken');
+                $.ajax({
+                    url: '/remove_from_cart/' + item_id + '/',
+                    type: 'POST',
+                    data: {
+                        quantity: quantity,
+                        csrfmiddlewaretoken: csrf_token
+                    },
+                    success: function (response) {
+                        alert(response.message);
+                        if (response.status === 'success') {
+                            location.reload();
+                            if (response.new_quantity === 0) {
+                                $('.card[data-id="' + item_id + '"]').remove();  // Remove item from UI if quantity = 0
+                            }
+                            else {
+                                $('.quantity-input[data-id="' + item_id + '"]').val(response.new_quantity); // Update UI quantity
+                            }
+
+                        }
+                    }
+                });
+            });
+
+            //update the price on frontend
+            $('.product-list .card').each(function () {
+                const price = parseFloat($(this).find('.price').data('price'));
+                const quantity = parseInt($(this).find('.quantity-input').val());
+                const total = price * quantity;
+                $(this).find('.price').text('$: ' + total.toFixed(2));
+            });
+
+            //Update the total sum of product frontend
+            $('.quantity-input').on('change', function () {
+                const card = $(this).closest('.card');
+                const price = parseFloat(card.find('.price').data('price'));
+                const quantity = parseInt($(this).val());
+                const total = price * quantity;
+                card.find('.price').text('$: ' + total.toFixed(2));
+                updateTotalSum();
+            });
+
+            updateTotalSum();
+        });
+    </script>
+    <div class="container">
+        <div class="header">
+            <div class="header-left">
+                <h2>E-mart</h2>
+                <p>Welcome Monika's E-mart System </p>
+            </div>
+            <div class="header-right">
+                <!-- <a href="{% url 'home' %}" class="back-button">Back</a> -->
+                <a href="" class="logout-button">Logout</a>
+                <a href="{% url 'order' %}" class="order-button">Order</a>
+            </div>
+        </div>
+        <!-- <h3>Cart</h3> -->
+        <div class="product-list">
+            {% for cart_item in cart_items %}
+            <div class="card">
+                <img src="{{ cart_item.product.image }}" alt="{{ cart_item.product.name }}">
+                <div class="card-content">
+                    <p>{{ cart_item.product.productname }}
+                    <p>
+                    <p class="price" data-price="{{ cart_item.product.price }}">$: {{ cart_item.product.price }}</p>
+                    <!-- <p class="quantity" data-quantity="{{ cart_item.quantity }}">Quantity: {{ cart_item.quantity }}</p> -->
+                    <p class="quantity" data-quantity="{{ cart_item.quantity }}">
+                        Quantity : <input type="number" name="quantity" class="quantity-input"
+                            value="{{ cart_item.quantity }}" min="0">
+                    </p>
+
+                    <form method="POST" action="{% url 'remove_from_cart' cart_item.id %}">
+                        {% csrf_token %}
+                        <!-- <p class="quantity" data-quantity="{{ cart_item.quantity }}">Quantity: {{ cart_item.quantity }}</p> -->
+                        <button type="submit" class="remove-from-cart-button"
+                            data-id="{{ cart_item.id }}">Remove</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="cart-total">
+        <p>Total Sum: $ <span id="total-sum">0</span></p>
+
+        <div class="payment-order"> <a href="/order" class="add-to-cart-payment"
+                onclick="alert('Thank you for shopping with us!  please fill out your details on order page.');">Proceed
+                to the Payment </a>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

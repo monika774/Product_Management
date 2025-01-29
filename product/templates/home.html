@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Product</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f2f2;
+            margin: 0;
+            padding: 20px;
+            padding-bottom: 0;
+        }
+
+        .container {
+            background-color: #f5f0f0;
+            padding: 20px;
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav {
+            background-color: #f5f7f5;
+            width: 100%;
+            margin: auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-left h2 {
+            margin: 0;
+            margin-right: 20px;
+
+        }
+
+        .header-left p {
+            margin: 0;
+            margin-right: 20px;
+            color: darkgreen;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-right .fas {
+            font-size: 1.5em;
+            margin-right: 10px;
+            color: #2374d1;
+        }
+
+        a {
+            padding: 10px 20px;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .login-button {
+            background-color: #4CAF50;
+            padding: 6px;
+            /* padding-left: 3px; */
+        }
+
+        .logout-button:hover {
+            background-color: #45a049;
+        }
+
+        .create-button {
+            background-color: #f39c12;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        .create-button:hover {
+            background-color: #e67e22;
+        }
+
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            gap: 36px;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            background-color: #fff;
+            padding: 5px;
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 200px;
+            text-align: left;
+            transition: box-shadow 0.3s;
+            border-style: groove;
+        }
+
+        .card:hover {
+            box-shadow: 0 0 20px rgba(0, 7, 10, 0.2);
+        }
+
+        .card img {
+            width: 90%;
+            height: 150px;
+            border-radius: 4px;
+            object-fit: cover;
+            align-self: center;
+            margin-bottom: 10px;
+        }
+
+        .card-content {
+            width: 100%;
+            text-align: center;
+        }
+
+        .card h4 {
+            margin: 10px 0 5px;
+            font-size: 15px;
+        }
+
+        .card p {
+            margin: 5px 0;
+            font-size: 12px;
+        }
+
+        .card .price {
+            margin-bottom: 10px;
+        }
+
+        .card .add-to-cart-button {
+            background-color: #28a745;
+            margin-top: 10px;
+            width: 45%;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            align-self: flex-start;
+        }
+
+        .card .add-to-cart-button:hover {
+            background-color: #218838;
+
+        }
+
+        .quantity {
+            font-size: 12px;
+        }
+
+        .quantity-input {
+            width: 20px;
+            font-size: 8px;
+            margin-right: 5px;
+            padding: 5px;
+        }
+
+        .footer {
+            background-color: black;
+            text-align: center;
+        }
+
+        .footer p {
+            color: whitesmoke;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.add-to-cart-button').click(function (event) {
+                event.preventDefault();
+
+                var form = $(this).closest('form');
+                var product_id = form.find('input[name="product_id"]').val();
+                var quantity = form.find('input[name="quantity"]').val();
+                var csrf_token = form.find('input[name="csrfmiddlewaretoken"]').val();
+
+                console.log("Product ID:", product_id);
+                console.log("Quantity:", quantity);
+                console.log("CSRF Token:", csrf_token);
+
+                $.ajax({
+                    url: form.attr('action'),
+                    type: 'POST',
+                    data: {
+                        product_id: product_id,
+                        quantity: quantity,
+                        csrfmiddlewaretoken: csrf_token
+                    },
+                    success: function (response) {
+                        alert(response.message);
+                        location.reload();
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error:", error);
+                        alert("Failed to add to cart!");
+                    }
+                });
+            });
+        });
+
+    </script>
+
+
+    <div class="container">
+        <div class="nav">
+            <div class="header">
+                <div class="header-left">
+                    <h2>E-mart</h2>
+                    <p>Welcome Monika's E-mart System</p>
+                    <form action="">
+                        <input type="text" placeholder="Search.." name="search">
+                        <button type="submit"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+                <div class="header-right">
+                    <a href="{% url 'cart' %}"><i class="fas fa-shopping-cart"></i></a>
+
+                    <a href="" class="login-button">Login</a>
+                </div>
+            </div>
+            <!-- <h3>Store</h3> -->
+        </div>
+        <div class="product-list">
+            {% for product in product %}
+            <div class="card">
+                <img src="{{ product.image }}" alt="{{ product.name }}">
+                <div class="card-content">
+                    <h4>{{ product.productname }}</h4>
+                    <p class="description">{{ product.description }}</p>
+                    <p class="price">$: {{ product.price }}</p>
+                    <p class="status">Stock is<span style="color:red;font-weight:bold"> {{product.status}} </span>Now
+                    </p>
+                    <form method="POST" action="{% url 'add_to_cart' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="product_id" value="{{ product.id }}">
+                        <!-- <label class="quantity" for="quantity">Quantity:</label>
+                        <input type="number" name="quantity" class="quantity-input" value="1" min="1"> -->
+                        <button type="submit" class="add-to-cart-button">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="footer">
+        <p>@Copyright  by  MonikaKohale  2025-26</p>
+    </div>
+
+</body>
+
+</html>
