@@ -276,7 +276,7 @@
             $('.remove-from-cart-button').click(function (event) {
                 event.preventDefault();
                 const item_id = $(this).data('id');
-                const quantity = $(this).closest('.card-content').find('.quantity-input').val(); // Get updated quantity
+                const quantity = $(this).closest('.card-content').find('.quantity-input').val(); 
 
 
                 const csrf_token = getCookie('csrftoken');
@@ -292,10 +292,10 @@
                         if (response.status === 'success') {
                             location.reload();
                             if (response.new_quantity === 0) {
-                                $('.card[data-id="' + item_id + '"]').remove();  // Remove item from UI if quantity = 0
+                                $('.card[data-id="' + item_id + '"]').remove();  
                             }
                             else {
-                                $('.quantity-input[data-id="' + item_id + '"]').val(response.new_quantity); // Update UI quantity
+                                $('.quantity-input[data-id="' + item_id + '"]').val(response.new_quantity);
                             }
 
                         }

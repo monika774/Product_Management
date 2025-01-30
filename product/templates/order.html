@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Payment Page</title>
+    <title>Payment Page</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
 
@@ -128,33 +128,33 @@
 
                     <div class="inputBox">
                         <label for="name">Full Name:</label>
-                        <input type="text" id="name" placeholder="Enter your full name" required>
+                        <input type="text" id="name" placeholder="Enter your full name">
                     </div>
 
                     <div class="inputBox">
                         <label for="email">Email:</label>
-                        <input type="email" id="email" placeholder="Enter email address" required>
+                        <input type="email" id="email" placeholder="Enter email address">
                     </div>
 
                     <div class="inputBox">
                         <label for="address">Address:</label>
-                        <input type="text" id="address" placeholder="Enter address" required>
+                        <input type="text" id="address" placeholder="Enter address">
                     </div>
 
                     <div class="inputBox">
                         <label for="city">City:</label>
-                        <input type="text" id="city" placeholder="Enter city" required>
+                        <input type="text" id="city" placeholder="Enter city">
                     </div>
 
                     <div class="flex">
                         <div class="inputBox">
                             <label for="state">State:</label>
-                            <input type="text" id="state" placeholder="Enter state" required>
+                            <input type="text" id="state" placeholder="Enter state">
                         </div>
 
                         <div class="inputBox">
                             <label for="zip">Zip Code:</label>
-                            <input type="text" id="zip" placeholder="123 456" pattern="\d{5}" required>
+                            <input type="text" id="zip" placeholder="123 456" pattern="\d{5}">
                         </div>
                     </div>
                 </div>
@@ -170,17 +170,17 @@
 
                     <div class="inputBox">
                         <label for="cardName">Name On Card:</label>
-                        <input type="text" id="cardName" placeholder="Enter card name" required>
+                        <input type="text" id="cardName" placeholder="Enter card name">
                     </div>
 
                     <div class="inputBox">
                         <label for="cardNum">Credit Card Number:</label>
-                        <input type="text" id="cardNum" placeholder="1111-2222-3333-4444" maxlength="19" required>
+                        <input type="text" id="cardNum" placeholder="1111-2222-3333-4444" maxlength="19">
                     </div>
 
                     <div class="inputBox">
                         <label>Exp Month:</label>
-                        <select id="expMonth" required>
+                        <select id="expMonth" >
                             <option value="">Choose month</option>
                             <option value="01">January</option>
                             <option value="02">February</option>
@@ -200,7 +200,7 @@
                     <div class="flex">
                         <div class="inputBox">
                             <label>Exp Year:</label>
-                            <select id="expYear" required>
+                            <select id="expYear" >
                                 <option value="">Choose Year</option>
                                 <option value="2024">2024</option>
                                 <option value="2025">2025</option>
@@ -212,13 +212,13 @@
 
                         <div class="inputBox">
                             <label for="cvv">CVV</label>
-                            <input type="text" id="cvv" placeholder="123" maxlength="4" pattern="\d{3,4}" required>
+                            <input type="text" id="cvv" placeholder="123" maxlength="4" pattern="\d{3,4}">
                         </div>
                     </div>
                 </div>
             </div>
 
-            <input type="submit" value="Proceed to Checkout" class="submit_btn">
+            <input type="submit" value="Proceed to Checkout" class="submit_btn"  onclick="alert('Thank you for order!');">
         </form>
     </div>
 
@@ -244,7 +244,7 @@
 
             document.getElementById('paymentForm').addEventListener('submit', (e) => {
                 e.preventDefault();
-                alert('Payment processing simulation complete!');
+                alert('Payment processing completed!');
             });
         });
     </script>
